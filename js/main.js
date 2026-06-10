@@ -63,6 +63,10 @@ function setupOrbButtons() {
           wrap.classList.remove('ar-fullscreen');
           mv.setAttribute('auto-rotate', '');
           mv.setAttribute('rotation-per-second', '15deg');
+          const cb = document.getElementById('ar-capture');
+          if (cb) cb.remove();
+          const cl = document.getElementById('ar-close');
+          if (cl) cl.remove();
         };
 
         const escHandler = (e) => {
@@ -76,6 +80,21 @@ function setupOrbButtons() {
         closeBtn.setAttribute('aria-label', 'Cerrar');
         closeBtn.addEventListener('click', exitFs);
         wrap.appendChild(closeBtn);
+
+        const capBtn = document.createElement('button');
+        capBtn.id = 'ar-capture';
+        capBtn.innerHTML = '📷';
+        capBtn.setAttribute('aria-label', 'Capturar foto');
+        capBtn.addEventListener('click', async () => {
+          try {
+            const url = await mv.toDataURL({ idealAspect: true });
+            const a = document.createElement('a');
+            a.download = 'diablo-uma-3d.jpg';
+            a.href = url;
+            a.click();
+          } catch (_) {}
+        });
+        wrap.appendChild(capBtn);
 
         try {
           await wrap.requestFullscreen?.();

@@ -488,6 +488,35 @@ footer {
   background: rgba(255,255,255,0.15);
 }
 
+#ar-capture {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 300;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  border: 3px solid rgba(255,255,255,0.5);
+  color: #fff;
+  font-size: 1.6rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+}
+
+#ar-capture:hover {
+  background: rgba(255,255,255,0.25);
+  transform: translateX(-50%) scale(1.1);
+}
+
+#ar-capture:active {
+  transform: translateX(-50%) scale(0.95);
+}
+
 /* ───────────────────────────────────────────────────────────
    MODAL SYSTEM
    ─────────────────────────────────────────────────────────── */
