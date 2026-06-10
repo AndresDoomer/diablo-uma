@@ -472,9 +472,9 @@ footer {
 }
 
 #ar-model-stage model-viewer {
-  width: 50%;
-  max-width: 280px;
-  height: 40%;
+  width: 35%;
+  max-width: 200px;
+  height: 30%;
   pointer-events: auto;
   --poster-color: transparent;
   background: transparent !important;
