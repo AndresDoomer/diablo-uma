@@ -439,6 +439,139 @@ footer {
 }
 
 /* ───────────────────────────────────────────────────────────
+   FULLSCREEN AR CAMERA
+   ─────────────────────────────────────────────────────────── */
+
+#ar-fullscreen-container {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#ar-fullscreen-container #ar-cam {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1);
+}
+
+#ar-fullscreen-container model-viewer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: auto;
+  --poster-color: transparent;
+  background: transparent !important;
+}
+
+#ar-canvas {
+  display: none;
+}
+
+#ar-preview {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 10;
+}
+
+#ar-close-btn {
+  position: fixed;
+  top: 20px;
+  left: 24px;
+  z-index: 600;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.5);
+  border: 2px solid rgba(255,255,255,0.3);
+  color: #fff;
+  font-size: 1.4rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+#ar-close-btn:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+#ar-capture-btn {
+  position: fixed;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 600;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  border: 4px solid rgba(255,255,255,0.6);
+  color: #fff;
+  font-size: 1.8rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+}
+
+#ar-capture-btn:hover {
+  background: rgba(255,255,255,0.3);
+  transform: translateX(-50%) scale(1.05);
+}
+
+#ar-capture-btn:active {
+  transform: translateX(-50%) scale(0.95);
+}
+
+#ar-fullscreen-container #ar-actions {
+  position: fixed;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 600;
+  display: none;
+  gap: 12px;
+  justify-content: center;
+  width: auto;
+}
+
+#ar-fullscreen-container #ar-actions .pill {
+  min-width: 130px;
+}
+
+#ar-hint {
+  position: fixed;
+  bottom: 130px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  font-size: 0.6rem;
+  color: rgba(255,255,255,0.5);
+  background: rgba(0,0,0,0.4);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-family: var(--sans);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* ───────────────────────────────────────────────────────────
    AR FULLSCREEN (desktop fallback)
    ─────────────────────────────────────────────────────────── */
 
@@ -641,75 +774,6 @@ footer {
   font-weight: 500;
 }
 
-/* ───────────────────────────────────────────────────────────
-   CAMERA
-   ─────────────────────────────────────────────────────────── */
-
-#ar-scene {
-  position: relative;
-  border-radius: 16px;
-  overflow: hidden;
-  background: #000;
-  margin-top: 16px;
-  aspect-ratio: 4/3;
-  width: 100%;
-}
-
-#ar-scene #vid {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  border-radius: 16px;
-  transform: scaleX(-1);
-}
-
-#ar-scene model-viewer {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-  pointer-events: auto;
-  --poster-color: transparent;
-  background: transparent !important;
-}
-
-#ar-hint {
-  position: absolute;
-  bottom: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 5;
-  font-size: 0.6rem;
-  color: rgba(255,255,255,0.5);
-  background: rgba(0,0,0,0.4);
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-family: var(--sans);
-  letter-spacing: 0.05em;
-  white-space: nowrap;
-  pointer-events: none;
-}
-
-#cnv {
-  display: none;
-}
-
-#preview {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 16px;
-  display: none;
-  z-index: 10;
-  box-shadow: 0 0 20px rgba(0, 212, 255, 0.15);
-}
-
 .btn-row {
   display: flex;
   gap: 10px;
@@ -750,13 +814,4 @@ footer {
 .pill.primary:hover {
   background: linear-gradient(135deg, var(--primary-light), rgba(161, 0, 242, 0.9));
   box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
-}
-
-.cam-note {
-  font-size: 0.7rem;
-  color: var(--text-muted);
-  text-align: center;
-  margin-top: 10px;
-  line-height: 1.6;
-  letter-spacing: 0.05em;
 }
