@@ -46,8 +46,10 @@ async function startFullscreenAR() {
         environment-image="neutral"
         exposure="1.2"
         camera-controls
-        camera-orbit="0deg 70deg 4m"
-        interaction-prompt="none"
+        camera-orbit="180deg 70deg 5m"
+        min-camera-orbit="auto auto 2m"
+        max-camera-orbit="auto auto 12m"
+        interaction-prompt="when-focused"
         style="--poster-color:transparent;background:transparent;width:100%;height:100%"
       ></model-viewer>
       <div id="ar-floor-shadow"></div>
@@ -132,7 +134,7 @@ async function captureAR() {
     const modelUrl = await mv.toDataURL({ idealAspect: true });
     const img = new Image();
     img.onload = () => {
-      const mw = w * 0.55;
+      const mw = w * 0.4;
       const mh = (img.height / img.width) * mw;
       const mx = (w - mw) / 2;
       const my = h - mh - 40;
