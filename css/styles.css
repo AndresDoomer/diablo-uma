@@ -76,7 +76,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 24px 40px 20px;
+  padding: 14px 40px 10px;
   background: linear-gradient(
     to bottom,
     rgba(10, 14, 39, 0.95) 0%,
@@ -352,6 +352,9 @@ model-viewer {
 
 /* Mobile portrait */
 @media (max-width: 600px) {
+  header {
+    padding: 24px 20px 20px;
+  }
   .orb-disc {
     width: 54px;
     height: 54px;
@@ -364,6 +367,9 @@ model-viewer {
 
 /* Mobile small */
 @media (max-width: 480px) {
+  header {
+    padding: 20px 16px 16px;
+  }
   .orb-disc {
     width: 48px;
     height: 48px;
