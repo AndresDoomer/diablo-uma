@@ -271,25 +271,21 @@ model-viewer {
   will-change: transform;
 }
 
-/* Top button */
 #b-quien {
   top: 0%;
   left: 50%;
 }
 
-/* Right button */
-#b-foto {
+#b-ar {
   top: 50%;
   left: 100%;
 }
 
-/* Bottom button */
 #b-hist {
-  bottom: -30%;
+  bottom: 0%;
   left: 50%;
 }
 
-/* Left button */
 #b-trad {
   top: 50%;
   left: 0%;
@@ -320,7 +316,7 @@ model-viewer {
   box-shadow: 0 0 12px rgba(0, 212, 255, 0.15);
 }
 
-#b-foto .orb-disc {
+#b-ar .orb-disc {
   border-color: var(--accent-1);
   box-shadow: 0 0 12px rgba(255, 0, 110, 0.2);
 }
@@ -372,60 +368,6 @@ model-viewer {
     width: 48px;
     height: 48px;
     font-size: 1.2rem;
-  }
-}
-
-/* ───────────────────────────────────────────────────────────
-   AR PILL
-   ─────────────────────────────────────────────────────────── */
-
-#ar-pill {
-  position: fixed;
-  bottom: 40px;
-  right: 40px;
-  z-index: 50;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 28px;
-  border-radius: 50px;
-  background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(161, 0, 242, 0.15));
-  border: 2px solid var(--primary);
-  backdrop-filter: blur(10px);
-  font-family: var(--sans);
-  font-size: 0.75rem;
-  letter-spacing: 0.15em;
-  color: var(--primary);
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-  box-shadow: 0 0 16px rgba(0, 212, 255, 0.15);
-  font-weight: 600;
-}
-
-#ar-pill:hover {
-  background: linear-gradient(135deg, rgba(0, 212, 255, 0.25), rgba(161, 0, 242, 0.25));
-  border-color: var(--primary-light);
-  transform: translateY(-4px);
-  box-shadow: 0 4px 24px rgba(0, 212, 255, 0.2);
-}
-
-#ar-pill .ar-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--primary);
-  animation: pulse 1.8s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.3;
-    transform: scale(1.3);
   }
 }
 

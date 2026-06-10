@@ -20,14 +20,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /**
  * Setup Orb Button Events
- * Attach click handlers to the modal trigger buttons
+ * Attach click handlers to the modal trigger buttons and AR button
  */
 function setupOrbButtons() {
   const buttons = [
     { id: 'b-quien', modal: 'quien' },
     { id: 'b-hist', modal: 'historia' },
-    { id: 'b-trad', modal: 'tradicion' },
-    { id: 'b-foto', modal: 'foto' }
+    { id: 'b-trad', modal: 'tradicion' }
   ];
 
   buttons.forEach(({ id, modal }) => {
@@ -36,6 +35,15 @@ function setupOrbButtons() {
       btn.addEventListener('click', () => showModal(modal));
     }
   });
+
+  // AR orb button triggers native AR on the model-viewer
+  const arBtn = document.getElementById('b-ar');
+  if (arBtn) {
+    arBtn.addEventListener('click', () => {
+      const trigger = document.getElementById('ar-trigger');
+      if (trigger) trigger.click();
+    });
+  }
 }
 
 // Make functions globally available for backwards compatibility

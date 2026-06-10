@@ -68,11 +68,8 @@
           ar-scale="fixed"
           style="--progress-bar-color: #d4a83a; --progress-mask: transparent"
         >
-          <!-- AR Button -->
-          <button slot="ar-button" id="ar-pill">
-            <span class="ar-dot"></span>
-            Ver en Realidad Aumentada
-          </button>
+          <!-- Hidden AR trigger (activates native AR on supported devices) -->
+          <button slot="ar-button" id="ar-trigger" style="display:none">AR</button>
         </model-viewer>
 
         <!-- Interactive Orb Buttons -->
@@ -105,11 +102,11 @@
 
         <button
           class="orb"
-          id="b-foto"
-          aria-label="Tomar foto"
+          id="b-ar"
+          aria-label="Realidad Aumentada"
         >
-          <div class="orb-disc">📸</div>
-          <span class="orb-label">Tomar<br />foto</span>
+          <div class="orb-disc">🌐</div>
+          <span class="orb-label">Realidad<br />Aumentada</span>
         </button>
       </div>
     </div>
