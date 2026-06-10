@@ -121,7 +121,7 @@ function finishPhoto(ctx, canvas, w, h, preview) {
   ctx.font = 'bold 13px "Playfair Display",Georgia,serif';
   ctx.fillStyle = '#d4a83a';
   ctx.textAlign = 'center';
-  ctx.fillText('Diablo Uma  ·  Pase del Niño  ·  Riobamba, Ecuador', w / 2, h - barH / 2 + 5);
+  ctx.fillText('Diablo Uma · Andres Guerrero · 097 890 6950', w / 2, h - barH / 2 + 5);
 
   preview.src = canvas.toDataURL('image/jpeg', 0.92);
   preview.style.display = 'block';

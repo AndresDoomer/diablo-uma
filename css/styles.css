@@ -286,6 +286,12 @@ model-viewer {
   left: 50%;
 }
 
+@media (min-width: 601px) {
+  #b-hist {
+    bottom: -130px;
+  }
+}
+
 #b-trad {
   top: 50%;
   left: 0%;
@@ -355,6 +361,9 @@ model-viewer {
   header {
     padding: 24px 20px 20px;
   }
+  #b-quien {
+    top: 6%;
+  }
   .orb-disc {
     width: 54px;
     height: 54px;
@@ -411,6 +420,56 @@ footer {
   border-radius: 50%;
   background: var(--primary);
   opacity: 0.6;
+}
+
+/* ───────────────────────────────────────────────────────────
+   AR FULLSCREEN (desktop fallback)
+   ─────────────────────────────────────────────────────────── */
+
+.ar-fullscreen {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 200 !important;
+  background: #000;
+  border-radius: 0 !important;
+}
+
+.ar-fullscreen model-viewer {
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 0 !important;
+}
+
+.ar-fullscreen .ring,
+.ar-fullscreen .floor-glow,
+.ar-fullscreen .orb,
+.ar-fullscreen #ar-hint {
+  display: none !important;
+}
+
+#ar-close {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  z-index: 300;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.6);
+  border: 2px solid rgba(255,255,255,0.3);
+  color: #fff;
+  font-size: 1.4rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+#ar-close:hover {
+  background: rgba(255,255,255,0.15);
 }
 
 /* ───────────────────────────────────────────────────────────
