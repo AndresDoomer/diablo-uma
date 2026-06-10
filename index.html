@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diablo Uma · Riobamba · Ecuador</title>
+
+    <!-- External Libraries -->
+    <script
+      type="module"
+      src="https://cdnjs.cloudflare.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"
+    ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+
+  <body>
+    <!-- Canvas for fire particles -->
+    <canvas id="fire-canvas"></canvas>
+    <div class="glow-bg"></div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         HEADER
+         ══════════════════════════════════════════════════════════ -->
+    <header>
+      <div class="header-left">
+        <span class="header-eyebrow">Patrimonio Cultural del Ecuador</span>
+        <h1 class="header-title">Diablo <em>Uma</em></h1>
+      </div>
+      <div class="header-right">
+        <span class="header-flag">🇪🇨</span>
+        <span class="header-loc">Riobamba · Chimborazo</span>
+      </div>
+    </header>
+
+    <!-- ══════════════════════════════════════════════════════════
+         STAGE - 3D VIEWER & INTERACTIVE ELEMENTS
+         ══════════════════════════════════════════════════════════ -->
+    <div id="stage">
+      <div id="viewer-wrap">
+        <!-- Golden rings -->
+        <div class="ring ring-2"></div>
+        <div class="ring ring-1"></div>
+        <div class="floor-glow"></div>
+
+        <!-- 3D Model Viewer with AR support -->
+        <model-viewer
+          id="mv"
+          src="models/diablo.glb"
+          alt="Diablo de Lata – Pase del Niño Riobamba"
+          shadow-intensity="1.4"
+          shadow-softness="1"
+          environment-image="neutral"
+          exposure="1.2"
+          auto-rotate
+          auto-rotate-delay="0"
+          rotation-per-second="15deg"
+          camera-controls
+          ar
+          ar-modes="webxr scene-viewer quick-look"
+          ar-scale="fixed"
+          style="--progress-bar-color: #d4a83a; --progress-mask: transparent"
+        >
+          <!-- AR Button -->
+          <button slot="ar-button" id="ar-pill">
+            <span class="ar-dot"></span>
+            Ver en Realidad Aumentada
+          </button>
+        </model-viewer>
+
+        <!-- Interactive Orb Buttons -->
+        <button
+          class="orb"
+          id="b-quien"
+          aria-label="¿Quién soy?"
+        >
+          <div class="orb-disc">👁️</div>
+          <span class="orb-label">¿Quién<br />soy?</span>
+        </button>
+
+        <button
+          class="orb"
+          id="b-hist"
+          aria-label="Mi historia"
+        >
+          <div class="orb-disc">📖</div>
+          <span class="orb-label">Mi<br />historia</span>
+        </button>
+
+        <button
+          class="orb"
+          id="b-trad"
+          aria-label="Tradición"
+        >
+          <div class="orb-disc">🏛️</div>
+          <span class="orb-label">Tradi&shy;ción</span>
+        </button>
+
+        <button
+          class="orb"
+          id="b-foto"
+          aria-label="Tomar foto"
+        >
+          <div class="orb-disc">📸</div>
+          <span class="orb-label">Tomar<br />foto</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         FOOTER
+         ══════════════════════════════════════════════════════════ -->
+    <footer>
+      <span class="footer-text">Pase del Niño</span>
+      <span class="footer-dot"></span>
+      <span class="footer-text">Riobamba 2024</span>
+      <span class="footer-dot"></span>
+      <span class="footer-text">Patrimonio Inmaterial</span>
+    </footer>
+
+    <!-- ══════════════════════════════════════════════════════════
+         MODAL SYSTEM
+         ══════════════════════════════════════════════════════════ -->
+    <div id="overlay" onclick="window.bgClose?.(event)">
+      <div class="modal-box" role="dialog" aria-modal="true" id="mbox">
+        <button class="modal-close" id="modal-close" aria-label="Cerrar">✕</button>
+        <span class="modal-emoji" id="memoji"></span>
+        <span class="modal-tag" id="mtag"></span>
+        <h2 class="modal-title" id="mtitle"></h2>
+        <div class="modal-body" id="mbody"></div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         SCRIPTS
+         ══════════════════════════════════════════════════════════ -->
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>
