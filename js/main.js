@@ -36,20 +36,22 @@ async function startFullscreenAR() {
 
   container.innerHTML = `
     <video id="ar-cam" autoplay playsinline muted></video>
-    <model-viewer
-      id="mv-ar"
-      src="models/diablo.glb"
-      alt="Diablo Uma AR"
-      shadow-intensity="0.6"
-      shadow-softness="0.5"
-      environment-image="neutral"
-      exposure="1.0"
-      camera-controls
-      auto-rotate
-      auto-rotate-delay="0"
-      rotation-per-second="12deg"
-      style="--poster-color:transparent;background:transparent;width:100%;height:100%"
-    ></model-viewer>
+    <div id="ar-model-stage">
+      <model-viewer
+        id="mv-ar"
+        src="models/diablo.glb"
+        alt="Diablo Uma AR"
+        shadow-intensity="1.2"
+        shadow-softness="0.8"
+        environment-image="neutral"
+        exposure="1.2"
+        camera-controls
+        camera-orbit="0deg 70deg 4m"
+        interaction-prompt="none"
+        style="--poster-color:transparent;background:transparent;width:100%;height:100%"
+      ></model-viewer>
+      <div id="ar-floor-shadow"></div>
+    </div>
     <canvas id="ar-canvas"></canvas>
     <img id="ar-preview" style="display:none" alt="Foto AR"/>
     <div id="ar-close-btn" aria-label="Cerrar">✕</div>
@@ -58,15 +60,16 @@ async function startFullscreenAR() {
       <button class="pill" id="ar-dl-btn">⬇ Descargar</button>
       <button class="pill" id="ar-retry-btn">↩ Repetir</button>
     </div>
-    <div id="ar-hint">Arrastra el modelo para moverlo · Pellizca para cambiar tamaño</div>
+    <div id="ar-hint">Arrastra el modelo · Pellizca para tamaño</div>
+    <button id="ar-go-native" style="display:none">🌐 Colocar en superficie</button>
   `;
 
   body.appendChild(container);
 
-  // Start camera
+  // Start rear camera
   try {
     const stream = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: 'user', width: { ideal: 640 }, height: { ideal: 480 } },
+      video: { facingMode: 'environment', width: { ideal: 640 }, height: { ideal: 480 } },
       audio: false
     });
     document.getElementById('ar-cam').srcObject = stream;
@@ -74,6 +77,18 @@ async function startFullscreenAR() {
   } catch (e) {
     container.innerHTML = `<p style="color:var(--primary);text-align:center;padding:40px;font-family:var(--sans)">No se pudo acceder a la cámara.</p>`;
     return;
+  }
+
+  // Show native AR button if WebXR AR is supported
+  const nativeBtn = document.getElementById('ar-go-native');
+  if (navigator.xr && await navigator.xr.isSessionSupported('immersive-ar').catch(() => false)) {
+    nativeBtn.style.display = 'flex';
+    nativeBtn.dataset.visible = 'true';
+    nativeBtn.addEventListener('click', () => {
+      exitAR(container);
+      const trigger = document.getElementById('ar-trigger');
+      if (trigger) trigger.click();
+    });
   }
 
   // Close button
@@ -110,25 +125,25 @@ async function captureAR() {
 
   const ctx = canvas.getContext('2d');
 
-  // Mirror webcam
-  ctx.translate(w, 0);
-  ctx.scale(-1, 1);
+  // Rear camera — no mirror
   ctx.drawImage(video, 0, 0);
-  ctx.setTransform(1, 0, 0, 1, 0, 0);
 
   try {
     const modelUrl = await mv.toDataURL({ idealAspect: true });
     const img = new Image();
     img.onload = () => {
-      const mw = w * 0.5;
+      const mw = w * 0.55;
       const mh = (img.height / img.width) * mw;
-      const mx = w - mw - 12;
-      const my = 12;
+      const mx = (w - mw) / 2;
+      const my = h - mh - 40;
 
-      ctx.shadowColor = 'rgba(0,0,0,0.5)';
-      ctx.shadowBlur = 24;
+      // Floor shadow
+      ctx.shadowColor = 'rgba(0,0,0,0.55)';
+      ctx.shadowBlur = 48;
+      ctx.shadowOffsetY = 8;
       ctx.drawImage(img, mx, my, mw, mh);
       ctx.shadowBlur = 0;
+      ctx.shadowOffsetY = 0;
 
       finishCapture(ctx, canvas, w, h, preview);
     };
@@ -152,8 +167,9 @@ function finishCapture(ctx, canvas, w, h, preview) {
   document.getElementById('ar-capture-btn').style.display = 'none';
   document.getElementById('ar-actions').style.display = 'flex';
   document.getElementById('ar-cam').style.display = 'none';
-  document.getElementById('mv-ar').style.display = 'none';
+  document.getElementById('ar-model-stage').style.display = 'none';
   document.getElementById('ar-hint').style.display = 'none';
+  document.getElementById('ar-go-native').style.display = 'none';
 }
 
 function downloadAR() {
@@ -169,8 +185,10 @@ function retryAR(container) {
   document.getElementById('ar-capture-btn').style.display = 'flex';
   document.getElementById('ar-actions').style.display = 'none';
   document.getElementById('ar-cam').style.display = 'block';
-  document.getElementById('mv-ar').style.display = 'block';
+  document.getElementById('ar-model-stage').style.display = 'flex';
   document.getElementById('ar-hint').style.display = 'block';
+  const nativeBtn = document.getElementById('ar-go-native');
+  if (nativeBtn && nativeBtn.dataset.visible) nativeBtn.style.display = 'flex';
 }
 
 window.show = showModal;
