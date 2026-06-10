@@ -46,7 +46,7 @@ async function startFullscreenAR() {
         environment-image="neutral"
         exposure="1.2"
         camera-controls
-        camera-orbit="0deg 70deg 4m"
+        camera-orbit="0deg 75deg 2.5m"
         interaction-prompt="none"
         style="--poster-color:transparent;background:transparent;width:100%;height:100%"
       ></model-viewer>
