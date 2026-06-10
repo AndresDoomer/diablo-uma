@@ -38,15 +38,6 @@ export async function startCam() {
     <p class="cam-note">Arrastra y pellizca el Diablo Uma para colocarlo como quieras</p>
   `;
 
-  // Show native AR button if supported
-  (async () => {
-    const nativeBtn = document.getElementById('native-ar-btn');
-    if (nativeBtn) {
-      const arOk = navigator.xr && await navigator.xr.isSessionSupported('immersive-ar').catch(() => false);
-      if (arOk) nativeBtn.style.display = 'block';
-    }
-  })();
-
   try {
     camStream = await navigator.mediaDevices.getUserMedia({
       video: { facingMode: 'user', width: { ideal: 640 }, height: { ideal: 480 } },

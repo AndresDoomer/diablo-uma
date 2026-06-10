@@ -40,9 +40,9 @@ export const MODAL_DATA = {
     `
   },
   foto: {
-    emoji: '🌐',
-    tag: 'Realidad Aumentada',
+    emoji: '📸',
+    tag: 'Experiencia',
     title: 'Tu foto con el Diablo Uma',
-    html: `<div id="camblock"></div><button id="native-ar-btn" style="display:none;margin-top:10px;width:100%;padding:10px;border-radius:50px;border:2px solid var(--primary);background:transparent;color:var(--primary);font-family:var(--sans);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;font-weight:600" onclick="document.getElementById('ar-trigger')?.click()">🌐 Abrir en AR nativo</button>`
+    html: `<div id="camblock"></div>`
   }
 };
