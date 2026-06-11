@@ -466,7 +466,13 @@ footer {
   z-index: 2;
   pointer-events: auto;
   --poster-color: transparent;
+  --progress-bar-color: transparent;
+  --progress-mask: transparent;
   background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  clip-path: none !important;
 }
 
 #ar-canvas {

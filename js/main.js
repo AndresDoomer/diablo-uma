@@ -45,7 +45,11 @@ async function startFullscreenAR() {
       min-camera-orbit="auto auto auto"
       max-camera-orbit="auto auto 80m"
       interaction-prompt="none"
-      style="--poster-color:transparent;background:transparent;width:100%;height:100%"
+      background-color="transparent"
+      shadow-intensity="0"
+      exposure="1"
+      tone-mapping="none"
+      style="--poster-color:transparent;background:transparent;width:100%;height:100%;border:none;outline:none"
     ></model-viewer>
     <canvas id="ar-canvas"></canvas>
     <img id="ar-preview" style="display:none" alt="Foto AR"/>
