@@ -36,24 +36,22 @@ async function startFullscreenAR() {
 
   container.innerHTML = `
     <video id="ar-cam" autoplay playsinline muted></video>
-    <div id="ar-model-stage">
-      <model-viewer
-        id="mv-ar"
-        src="models/diablo.glb"
-        alt="Diablo Uma AR"
-        shadow-intensity="1.2"
-        shadow-softness="0.8"
-        environment-image="neutral"
-        exposure="1.2"
-        camera-controls
-        camera-orbit="180deg 75deg 30m"
-        min-camera-orbit="auto auto auto"
-        max-camera-orbit="auto auto 80m"
-        interaction-prompt="none"
-        style="--poster-color:transparent;background:transparent;width:100%;height:100%"
-      ></model-viewer>
-      <div id="ar-floor-shadow"></div>
-    </div>
+    <model-viewer
+      id="mv-ar"
+      src="models/diablo.glb"
+      alt="Diablo Uma AR"
+      shadow-intensity="1.2"
+      shadow-softness="0.8"
+      environment-image="neutral"
+      exposure="1.2"
+      camera-controls
+      camera-orbit="180deg 75deg 30m"
+      min-camera-orbit="auto auto auto"
+      max-camera-orbit="auto auto 80m"
+      interaction-prompt="none"
+      style="--poster-color:transparent;background:transparent;width:100%;height:100%"
+    ></model-viewer>
+    <div id="ar-floor-shadow"></div>
     <canvas id="ar-canvas"></canvas>
     <img id="ar-preview" style="display:none" alt="Foto AR"/>
     <div id="ar-close-btn" aria-label="Cerrar">✕</div>
@@ -169,7 +167,8 @@ function finishCapture(ctx, canvas, w, h, preview) {
   document.getElementById('ar-capture-btn').style.display = 'none';
   document.getElementById('ar-actions').style.display = 'flex';
   document.getElementById('ar-cam').style.display = 'none';
-  document.getElementById('ar-model-stage').style.display = 'none';
+  document.getElementById('mv-ar').style.display = 'none';
+  document.getElementById('ar-floor-shadow').style.display = 'none';
   document.getElementById('ar-hint').style.display = 'none';
   document.getElementById('ar-go-native').style.display = 'none';
 }
@@ -187,7 +186,8 @@ function retryAR(container) {
   document.getElementById('ar-capture-btn').style.display = 'flex';
   document.getElementById('ar-actions').style.display = 'none';
   document.getElementById('ar-cam').style.display = 'block';
-  document.getElementById('ar-model-stage').style.display = 'flex';
+  document.getElementById('mv-ar').style.display = 'block';
+  document.getElementById('ar-floor-shadow').style.display = 'block';
   document.getElementById('ar-hint').style.display = 'block';
   const nativeBtn = document.getElementById('ar-go-native');
   if (nativeBtn && nativeBtn.dataset.visible) nativeBtn.style.display = 'flex';
