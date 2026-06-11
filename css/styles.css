@@ -447,7 +447,7 @@ footer {
   inset: 0;
   z-index: 500;
   background: #000;
-  overflow: visible;
+  overflow: hidden;
 }
 
 #ar-fullscreen-container #ar-cam {

@@ -45,8 +45,6 @@ async function startFullscreenAR() {
       min-camera-orbit="auto auto auto"
       max-camera-orbit="auto auto 80m"
       interaction-prompt="none"
-      environment-image="none"
-      skybox-image="none"
       style="--poster-color:transparent;background:transparent;width:100%;height:100%"
     ></model-viewer>
     <canvas id="ar-canvas"></canvas>
