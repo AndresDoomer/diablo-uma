@@ -40,12 +40,13 @@ async function startFullscreenAR() {
       id="mv-ar"
       src="models/diablo.glb"
       alt="Diablo Uma AR"
-      shadow-intensity="0"
       camera-controls
       camera-orbit="180deg 75deg 30m"
       min-camera-orbit="auto auto auto"
       max-camera-orbit="auto auto 80m"
       interaction-prompt="none"
+      environment-image="none"
+      skybox-image="none"
       style="--poster-color:transparent;background:transparent;width:100%;height:100%"
     ></model-viewer>
     <canvas id="ar-canvas"></canvas>
